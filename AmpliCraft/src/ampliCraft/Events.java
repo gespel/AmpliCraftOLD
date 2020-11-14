@@ -1,5 +1,6 @@
 package ampliCraft;
 
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,6 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 
 public class Events implements Listener {
 	private AmpliCraft plugin;
@@ -54,6 +56,10 @@ public class Events implements Listener {
 		}
         
     }
+	@EventHandler
+	public void onPlayermove(PlayerMoveEvent event) {
+		event.getPlayer().getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, event.getPlayer().getLocation(), 10);
+	}
 	@EventHandler
 	public void onActivate(PlayerInteractEvent event) {
 		Player p = event.getPlayer();

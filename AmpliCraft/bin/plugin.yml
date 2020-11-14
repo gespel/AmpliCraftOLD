@@ -47,4 +47,7 @@ commands:
   teleporter:
     description: Teleportiert dich zu teleporter Insel
     usage: /teleporter
+  mysterybox:
+    description: Die MysteryBox
+    usage: /mysterybox open
   

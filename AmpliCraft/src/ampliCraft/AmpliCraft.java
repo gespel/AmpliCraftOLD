@@ -44,5 +44,6 @@ public class AmpliCraft extends JavaPlugin implements Listener {
         getCommand("pvearena").setExecutor(new Commands(this));
         getCommand("zone").setExecutor(new Commands(this));
         getCommand("teleporter").setExecutor(new Commands(this));
+        getCommand("mysterybox").setExecutor(new Commands(this));
 	}
 }

@@ -139,6 +139,14 @@ public class Commands implements CommandExecutor {
 			if(cmd.getName().equalsIgnoreCase("teleporter")) {
 				Teleporter.teleportToWorldTeleporterIsland(p);
 			}
+			if(cmd.getName().equalsIgnoreCase("mysterybox")) {
+				if(args.length == 1) {
+					if(args[0].equalsIgnoreCase("open")) {
+						MysteryBox box = new MysteryBox(p, plugin);
+						box.openMysteryBox();
+					}
+				}
+			}
 		}
 		return true;
 	}
