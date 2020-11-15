@@ -23,6 +23,25 @@ public class Geldsystem {
 			config.set(player + ".Money", Float.toString(geld));
 		}
 	}
+	public void giveMoney(float menge) {
+		float geld = Float.parseFloat(config.getString(p.getName() + ".Money"));
+		geld += menge;
+		config.set(p.getName() + ".Money", Float.toString(geld));
+		p.sendMessage(ChatColor.GOLD + "Du hast " + ChatColor.GREEN + menge + " €" + ChatColor.GOLD + " erhalten!");
+	}
+	public boolean payMoney(float menge) {
+		float geld = Float.parseFloat(config.getString(p.getName() + ".Money"));
+		if(geld - menge >= 0) {
+			p.sendMessage(ChatColor.GOLD + "Du hast " + ChatColor.GREEN + menge + ChatColor.GOLD + " gezahlt!");
+			geld = geld - menge;
+			config.set(p.getName() + ".Money", Float.toString(geld));
+			return true;
+		}
+		else {
+			p.sendMessage(ChatColor.RED + "Du hast nicht genug Geld dafür!");
+			return false;
+		}
+	}
 	public void sendMoney(String recvname, float menge) {
 		Player recv = Bukkit.getPlayer(recvname);
 		float sendergeld = Float.parseFloat(config.getString(p.getName() + ".Money"));

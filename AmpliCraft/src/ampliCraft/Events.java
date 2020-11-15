@@ -1,6 +1,5 @@
 package ampliCraft;
 
-import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -58,7 +57,7 @@ public class Events implements Listener {
     }
 	@EventHandler
 	public void onPlayermove(PlayerMoveEvent event) {
-		event.getPlayer().getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, event.getPlayer().getLocation(), 10);
+		//event.getPlayer().getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, event.getPlayer().getLocation(), 10);
 	}
 	@EventHandler
 	public void onActivate(PlayerInteractEvent event) {
@@ -70,9 +69,23 @@ public class Events implements Listener {
 					event.setCancelled(true);
 				}
 			}
+			else if(event.getClickedBlock().getLocation().equals(Locations.kistenHebel)) {
+				Geldsystem geld = new Geldsystem(p, plugin.config);
+				if(geld.payMoney(100)) {
+					MysteryBox box = new MysteryBox(p, plugin);
+					box.openMysteryBox();
+				}
+				event.setCancelled(true);
+			}
 			else if(event.getClickedBlock().getLocation().equals(Locations.folterkammerChest)) {
 				if(PlayerSets.folterkammerPlayer.contains(p)) {
 					Game.finishedFolterkammer(p, event, plugin.config);
+					event.setCancelled(true);
+				}
+			}
+			else if(event.getClickedBlock().getLocation().equals(Locations.elytraChest)) {
+				if(PlayerSets.elytraPlayer.contains(p)) {
+					Game.finishedEyltra(p, event, plugin.config);
 					event.setCancelled(true);
 				}
 			}

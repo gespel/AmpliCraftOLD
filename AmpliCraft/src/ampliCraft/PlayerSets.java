@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 public class PlayerSets {
 	public static Set<Player> jnrPlayer = new HashSet<Player>();
+	public static Set<Player> elytraPlayer = new HashSet<Player>();
 	public static Set<Player> blueTeam = new HashSet<Player>();
 	public static Set<Player> redTeam = new HashSet<Player>();
 	public static Set<Player> folterkammerPlayer = new HashSet<Player>();
