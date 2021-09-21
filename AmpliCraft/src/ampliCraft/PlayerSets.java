@@ -14,4 +14,5 @@ public class PlayerSets {
 	public static Set<Player> folterkammerPlayer = new HashSet<Player>();
 	public static HashMap<Player, Long> folterkammerTimer = new HashMap<Player, Long>();
 	public static HashMap<Player, Long> jnrTimer = new HashMap<Player, Long>();
+	public static HashMap<Player, StelaritPlayer> stelaritPlayer = new HashMap<Player, StelaritPlayer>();
 }

@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AmpliCraft extends JavaPlugin implements Listener {
 	public FileConfiguration config;
 	public Playerranks ranks;
+	public Stelarit stelarit;
 	public void onEnable() {
 		WorldCreator bauwelt = new WorldCreator("bauwelt");
 		WorldCreator games = new WorldCreator("games");
@@ -17,6 +18,7 @@ public class AmpliCraft extends JavaPlugin implements Listener {
         ranks = new Playerranks(config);
         bauwelt.createWorld();
         games.createWorld();
+        stelarit = new Stelarit(config);
         System.out.println("=================== Amplitueden Minecraft Server wird gestartet ===================");
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() { 
         	public void run() { 
@@ -45,5 +47,6 @@ public class AmpliCraft extends JavaPlugin implements Listener {
         getCommand("zone").setExecutor(new Commands(this));
         getCommand("teleporter").setExecutor(new Commands(this));
         getCommand("mysterybox").setExecutor(new Commands(this));
+        getCommand("stelarit").setExecutor(new Commands(this));
 	}
 }

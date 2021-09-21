@@ -50,4 +50,7 @@ commands:
   mysterybox:
     description: Die MysteryBox
     usage: /mysterybox open
+  stelarit:
+    description: Stelarit RPG
+    usage: /stelarit enter
   

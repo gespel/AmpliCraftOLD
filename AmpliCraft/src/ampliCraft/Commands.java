@@ -48,6 +48,18 @@ public class Commands implements CommandExecutor {
 				Levelsystem lvl = new Levelsystem(p, plugin.config);
 				lvl.getPlayerInfo();
 			}
+			if(cmd.getName().equalsIgnoreCase("stelarit")) {
+				if(args.length == 1) {
+					if(args[0].equalsIgnoreCase("enter")) {
+						StelaritPlayer sp = new StelaritPlayer(p, plugin.config);
+						plugin.stelarit.addPlayerToStelarit(p, sp);
+					}
+					else if(args[0].equalsIgnoreCase("leave")) {
+						plugin.stelarit.removePlayerFromStelarit(p);
+					}
+					
+				}
+			}
 			if(cmd.getName().equalsIgnoreCase("rang") || cmd.getName().equalsIgnoreCase("rank")) {
 				if(args.length == 0) {
 					plugin.ranks.getRang(p);
