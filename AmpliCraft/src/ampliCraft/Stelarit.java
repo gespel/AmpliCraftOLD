@@ -1,18 +1,25 @@
 package ampliCraft;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 
 public class Stelarit {
 	FileConfiguration config;
+	
 	public Stelarit(FileConfiguration config) {
 		this.config = config;
+		Entity birk = Bukkit.getWorld("stelarit").spawnEntity(new Location(Bukkit.getWorld("stelarit"), -175, 77, -172), EntityType.VILLAGER);
+		PlayerSets.stelaritNPCS.put("birk", birk);
 		System.out.println("Stelarit wurde gestartet!");
 	}
+	
 	public void addPlayerToStelarit(Player p, StelaritPlayer sp) {
-		
 		if(!PlayerSets.stelaritPlayer.containsKey(p)) {
 			PlayerSets.stelaritPlayer.put(p, sp);
 			if(sp.getPlayerProgress() == 0) {

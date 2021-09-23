@@ -1,11 +1,13 @@
 package ampliCraft;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -58,6 +60,14 @@ public class Events implements Listener {
 	@EventHandler
 	public void onPlayermove(PlayerMoveEvent event) {
 		//event.getPlayer().getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, event.getPlayer().getLocation(), 10);
+	}
+	@EventHandler 
+	public void onEntity(PlayerInteractEntityEvent event) {
+		Entity entity = event.getRightClicked();
+		Player p = event.getPlayer();
+		if(entity.equals(PlayerSets.stelaritNPCS.get("birk"))) {
+			p.sendMessage("Du hast Birk angeclickt!");
+		}
 	}
 	@EventHandler
 	public void onActivate(PlayerInteractEvent event) {
