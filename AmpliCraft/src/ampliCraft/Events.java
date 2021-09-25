@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -47,26 +48,51 @@ public class Events implements Listener {
 	}
 	@EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
-		Player opfer = (Player) event.getEntity();
-		Player angreifer = (Player) event.getDamager();
-		if(PlayerSets.blueTeam.contains(opfer) && PlayerSets.blueTeam.contains(angreifer)) {
-			event.setCancelled(true);
+		Entity enemy = event.getEntity();
+		Entity attacker = event.getDamager();
+		if(attacker instanceof Player) {
+			if(enemy instanceof Player) {
+				Player opfer = (Player) event.getEntity();
+				Player angreifer = (Player) event.getDamager();
+				if(PlayerSets.blueTeam.contains(opfer) && PlayerSets.blueTeam.contains(angreifer)) {
+					event.setCancelled(true);
+				}
+				if(PlayerSets.redTeam.contains(opfer) && PlayerSets.redTeam.contains(angreifer)) {
+					event.setCancelled(true);
+				}
+			}
 		}
-		if(PlayerSets.redTeam.contains(opfer) && PlayerSets.redTeam.contains(angreifer)) {
-			event.setCancelled(true);
-		}
-        
     }
 	@EventHandler
 	public void onPlayermove(PlayerMoveEvent event) {
 		//event.getPlayer().getWorld().spawnParticle(Particle.SOUL_FIRE_FLAME, event.getPlayer().getLocation(), 10);
 	}
+	@EventHandler
+	public void onDeath(EntityDeathEvent event) {
+		Entity mob = event.getEntity();
+		Entity killer = event.getEntity().getKiller();
+		if (killer instanceof Player) {
+			Player p = (Player)killer;
+			if(PlayerSets.stelaritPlayer.containsKey(p)) {
+				StelaritPlayer sp = PlayerSets.stelaritPlayer.get(p);
+				for(StelaritQuest q : sp.activeQuests.values()) {
+					if(mob.getType().equals(q.targetMob)) {
+						q.killedOneQuestMob();
+					}
+				}
+			}
+        }
+	}
 	@EventHandler 
 	public void onEntity(PlayerInteractEntityEvent event) {
 		Entity entity = event.getRightClicked();
 		Player p = event.getPlayer();
+		StelaritPlayer sp = PlayerSets.stelaritPlayer.get(p);
 		if(entity.equals(PlayerSets.stelaritNPCS.get("birk"))) {
-			p.sendMessage("Du hast Birk angeclickt!");
+			if(sp.getPlayerProgress() == 1 && !sp.activeQuests.containsKey("ersteSchritte")) {
+				StelaritQuest q = new StelaritQuest("ersteSchritte", sp, plugin.config);
+				sp.addQuest("ersteSchritte", q);
+			}
 		}
 	}
 	@EventHandler

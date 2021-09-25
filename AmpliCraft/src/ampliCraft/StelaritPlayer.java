@@ -1,5 +1,7 @@
 package ampliCraft;
 
+import java.util.HashMap;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -7,6 +9,7 @@ public class StelaritPlayer {
 	private Player p;
 	private int playerProgress = 0;
 	private FileConfiguration config;
+	public HashMap<String, StelaritQuest> activeQuests = new HashMap<String, StelaritQuest>();
 	
 	public StelaritPlayer(Player p, FileConfiguration config) {
 		this.setPlayer(p);
@@ -36,5 +39,12 @@ public class StelaritPlayer {
 
 	public void setPlayer(Player p) {
 		this.p = p;
+	}
+	public void addQuest(String name, StelaritQuest q) {
+		this.activeQuests.put(name, q);
+		q.triggerStartText();
+	}
+	public void removeQuest(String name) {
+		this.activeQuests.remove(name);
 	}
 }

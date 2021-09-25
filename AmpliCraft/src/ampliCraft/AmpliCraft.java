@@ -13,11 +13,13 @@ public class AmpliCraft extends JavaPlugin implements Listener {
 	public void onEnable() {
 		WorldCreator bauwelt = new WorldCreator("bauwelt");
 		WorldCreator games = new WorldCreator("games");
+		WorldCreator stela = new WorldCreator("stelarit");
 		Bukkit.getPluginManager().registerEvents(new Events(this), this);
         config = this.getConfig();
         ranks = new Playerranks(config);
         bauwelt.createWorld();
         games.createWorld();
+        stela.createWorld();
         stelarit = new Stelarit(config);
         System.out.println("=================== Amplitueden Minecraft Server wird gestartet ===================");
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() { 
