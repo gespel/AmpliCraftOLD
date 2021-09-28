@@ -51,13 +51,11 @@ public class Quest {
 		questExp.addExp(rewardExp);
 		//this.sp.removeQuest(id);
 	}
-	@SuppressWarnings("removal")
 	public void lastDialog() {
 		if(this.id.equalsIgnoreCase("ersteSchritte")) {
 			sp.getPlayer().sendMessage(ChatColor.BLUE + "Danke! Endlich muss ich mir keine sorgen mehr machen, dass die Hälfte meiner Kundschaft auf dem Weg zu meiner Kneipe aufgefressen wird. Falls du wieder Arbeit suchst sprich mich an. Achso hier ist noch ein bisschen Geld für dich!");
 			Geldsystem geld = new Geldsystem(sp.getPlayer(), config);
-			//sp.getPlayer().sendMessage(Float.toString(rewardMoney));
-			//geld.addMoney(rewardMoney); BUGGY ka
+			geld.addMoney(rewardMoney);
 			sp.setPlayerProgress(3);
 			this.sp.removeQuest(id);
 		}

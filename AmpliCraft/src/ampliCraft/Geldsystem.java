@@ -43,7 +43,7 @@ public class Geldsystem {
 		}
 	}
 	public void addMoney(float menge) {
-		config.set(p.getName() + ".Money", Float.toString(Float.parseFloat(config.getString(p.getName() + ".Money") + menge)));
+		config.set(p.getName() + ".Money", Float.toString(Float.parseFloat(config.getString(p.getName() + ".Money")) + menge));
 		p.sendMessage(ChatColor.GOLD + "Du erhälst " + ChatColor.GREEN + menge + ChatColor.GOLD +" €!");
 	}
 	public void sendMoney(String recvname, float menge) {
