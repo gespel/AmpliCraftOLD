@@ -30,7 +30,7 @@ public class ZoneManager {
 		DefaultDomain owner = region.getOwners();
 		if(owner.getUniqueIds().isEmpty()) {
 			owner.addPlayer(p.getUniqueId());
-			p.sendMessage(ChatColor.GREEN + "Du hast das GrundstÃ¼ck " + ChatColor.GOLD + region.getId() + ChatColor.GREEN + " fÃ¼r dich beansprucht!");
+			p.sendMessage(ChatColor.GREEN + "Du hast das Grundstück " + ChatColor.GOLD + region.getId() + ChatColor.GREEN + " für dich beansprucht!");
 		}
 		else {
 			p.sendMessage(ChatColor.RED + "Dieses Land wurde bereits beansprucht!");
@@ -44,7 +44,7 @@ public class ZoneManager {
 				Player add = Bukkit.getPlayer(name);
 				DefaultDomain owners = region.getOwners();
 				owners.addPlayer(add.getUniqueId());
-				add.sendMessage(ChatColor.GREEN + "Du wurdest als Besitzer zum GrundstÃ¼ck " + ChatColor.GOLD + name + ChatColor.GREEN + " hinzugefÃ¼gt!");
+				add.sendMessage(ChatColor.GREEN + "Du wurdest als Besitzer zum Grundstück " + ChatColor.GOLD + name + ChatColor.GREEN + " hinzugefügt!");
 				break;
 			}
 		}
@@ -52,7 +52,7 @@ public class ZoneManager {
 			p.sendMessage(ChatColor.RED + "Du besitzt diese Zone nicht!");
 		}
 		else {
-			p.sendMessage(ChatColor.GOLD + name + ChatColor.GREEN +  " wurde hinzugefÃ¼gt!");
+			p.sendMessage(ChatColor.GOLD + name + ChatColor.GREEN +  " wurde hinzugefügt!");
 		}
 	}
 	public static void printZoneInfo(Player p) {

@@ -9,7 +9,7 @@ public class StelaritPlayer {
 	private Player p;
 	private int playerProgress = 0;
 	private FileConfiguration config;
-	public HashMap<String, StelaritQuest> activeQuests = new HashMap<String, StelaritQuest>();
+	public HashMap<String, Quest> activeQuests = new HashMap<String, Quest>();
 	
 	public StelaritPlayer(Player p, FileConfiguration config) {
 		this.setPlayer(p);
@@ -40,7 +40,7 @@ public class StelaritPlayer {
 	public void setPlayer(Player p) {
 		this.p = p;
 	}
-	public void addQuest(String name, StelaritQuest q) {
+	public void addQuest(String name, Quest q) {
 		this.activeQuests.put(name, q);
 		q.triggerStartText();
 	}

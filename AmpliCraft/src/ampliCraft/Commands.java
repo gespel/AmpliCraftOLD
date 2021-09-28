@@ -59,6 +59,17 @@ public class Commands implements CommandExecutor {
 					}
 					
 				}
+				if(args.length == 3) {
+					if(args[0].equalsIgnoreCase("setprogress")) {
+						Player target = Bukkit.getPlayer(args[1]);
+						if(PlayerSets.stelaritPlayer.containsKey(target)) {
+							StelaritPlayer sptarget = PlayerSets.stelaritPlayer.get(target);
+							sptarget.setPlayerProgress(Integer.parseInt(args[2]));
+							p.sendMessage(ChatColor.RED + "Stelaritfortschritt gesetzt!");
+							target.sendMessage(ChatColor.ITALIC + "" + ChatColor.RED + "Dein Stelaritfortschritt wurde geändert!");
+						}
+					}
+				}
 			}
 			if(cmd.getName().equalsIgnoreCase("rang") || cmd.getName().equalsIgnoreCase("rank")) {
 				if(args.length == 0) {

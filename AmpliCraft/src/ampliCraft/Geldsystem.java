@@ -14,7 +14,7 @@ public class Geldsystem {
 	}
 	public void getMoney() {
 		float geld = Float.parseFloat(config.getString(p.getName() + ".Money"));
-		p.sendMessage("Du hast " + ChatColor.GREEN + geld + ChatColor.RESET + " â‚¬");
+		p.sendMessage("Du hast " + ChatColor.GREEN + geld + ChatColor.RESET + " €");
 	}
 	public static void zinsenTick(FileConfiguration config) {
 		for(String player : config.getConfigurationSection("").getKeys(false)) {
@@ -38,9 +38,13 @@ public class Geldsystem {
 			return true;
 		}
 		else {
-			p.sendMessage(ChatColor.RED + "Du hast nicht genug Geld dafÃ¼r!");
+			p.sendMessage(ChatColor.RED + "Du hast nicht genug Geld dafür!");
 			return false;
 		}
+	}
+	public void addMoney(float menge) {
+		config.set(p.getName() + ".Money", Float.toString(Float.parseFloat(config.getString(p.getName() + ".Money") + menge)));
+		p.sendMessage(ChatColor.GOLD + "Du erhälst " + ChatColor.GREEN + menge + ChatColor.GOLD +" €!");
 	}
 	public void sendMoney(String recvname, float menge) {
 		Player recv = Bukkit.getPlayer(recvname);
@@ -51,8 +55,8 @@ public class Geldsystem {
 			sendergeld -= menge;
 			config.set(p.getName() + ".Money", Float.toString(sendergeld));
 			config.set(recv.getName() + ".Money", Float.toString(empfgeld));
-			p.sendMessage("Du hast " + recv.getName() + " " + ChatColor.GREEN + menge + ChatColor.RESET + " â‚¬ geschickt!");
-			recv.sendMessage("Du hast von " + p.getName() + " " + ChatColor.GREEN + menge + ChatColor.RESET + " â‚¬ erhalten!");
+			p.sendMessage("Du hast " + recv.getName() + " " + ChatColor.GREEN + menge + ChatColor.RESET + " € geschickt!");
+			recv.sendMessage("Du hast von " + p.getName() + " " + ChatColor.GREEN + menge + ChatColor.RESET + "€ erhalten!");
 		}
 		else {
 			p.sendMessage(ChatColor.RED + "So viel Geld hast du nicht!");

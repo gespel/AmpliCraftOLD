@@ -75,7 +75,7 @@ public class Events implements Listener {
 			Player p = (Player)killer;
 			if(PlayerSets.stelaritPlayer.containsKey(p)) {
 				StelaritPlayer sp = PlayerSets.stelaritPlayer.get(p);
-				for(StelaritQuest q : sp.activeQuests.values()) {
+				for(Quest q : sp.activeQuests.values()) {
 					if(mob.getType().equals(q.targetMob)) {
 						q.killedOneQuestMob();
 					}
@@ -87,11 +87,18 @@ public class Events implements Listener {
 	public void onEntity(PlayerInteractEntityEvent event) {
 		Entity entity = event.getRightClicked();
 		Player p = event.getPlayer();
-		StelaritPlayer sp = PlayerSets.stelaritPlayer.get(p);
 		if(entity.equals(PlayerSets.stelaritNPCS.get("birk"))) {
+			StelaritPlayer sp = PlayerSets.stelaritPlayer.get(p);
 			if(sp.getPlayerProgress() == 1 && !sp.activeQuests.containsKey("ersteSchritte")) {
-				StelaritQuest q = new StelaritQuest("ersteSchritte", sp, plugin.config);
+				Quest q = new Quest("ersteSchritte", sp, plugin.config);
 				sp.addQuest("ersteSchritte", q);
+			}
+			if(sp.getPlayerProgress() == 2 && sp.activeQuests.containsKey("ersteSchritte")) {
+				for(Quest q : sp.activeQuests.values()) {
+					if(q.id.equalsIgnoreCase("ersteSchritte")) {
+						q.lastDialog();
+					}
+				}
 			}
 		}
 	}
